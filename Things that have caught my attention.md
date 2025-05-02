@@ -1,0 +1,3 @@
+- [[AFinalCoalgebraTheorem.pdf#page=1&selection=72,30,87,5|AFinalCoalgebraTheorem, page 1]]
+	- Seems like we need set theory...
+- 
