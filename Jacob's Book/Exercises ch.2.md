@@ -69,9 +69,29 @@ Now, $[Id_X \times k_1, Id_X \times k_2](a,c)$ if $(a,c) \in (X \times Y)$ is $I
 
 Let $C$ be a category with finite products ($\times$, 1), prove that the following are isomorphisms:
 
-$X\times Y \cong Y \times X$
+- $X\times Y \cong Y \times X$:
+	- Consider this [diagram](https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQANAAgB0e8AtvC4BNEAF9S6TLnyEU5UsWp0mrdhwlSQGbHgJEyAJhUMWbRCBG9+WIXC6bJ0vXKJGlptRasSVMKABzeCJQADMAJwgBJEUQHAgkMlVzdj40LAB9AA8QGkZ6ACMYRgAFGX15ECwwbFgtcKiYxA94xMRks3VLdKzc-KKS8tcDSxq6tmcQSOikVoSkAGYaLp9ezIBPPJAC4rKKtzHarHqpmea4hcRllO6Qda2BveHZUerj0+1z2Jor1sYaj4oBAcDgAttVmkeAUwIFGDAuGFSIE+BF6LD4dtdkMDm9xidJpRxEA) the morphism $\langle f, g \rangle$ exists by universal property of products and is defined as $\langle f, g\rangle(x, y) = (y, x)$. The arrow in the other direction is instead $\langle f,g\rangle^{-1}(y, x) = (x, y)$ their composition $\langle f,g\rangle \circ \langle f, g \rangle^{-1}(y, x)$ is the identity morphism on $Y \times X$
+- $(X\times Y)\times Z \cong X \times (Y \times Z)$
+	- Let $f: (X\times Y)\times Z \rightarrow X \times (Y \times Z)$ be defined as $f(x, y) = (\pi_x(x), (\pi_y(x), y)$
+	- And $f': X \times (Y \times Z) \rightarrow (X\times Y)\times Z$ be defined as $f'(x, y) =((x, \pi_y(y)), \pi_z(y))$
+	- Then $f \circ f'(x, y) = f((x, \pi_y(y)), \pi_z(y)) = (\pi_x(x, \pi_y(y)), (\pi_y(x, \pi_y(y)), \pi_z(y))=(x, (\pi_y(y), \pi_z(y))=(x, y)$
+	- And similarly can be shown that $f' \circ f(x, y) =(x, y)$
+- $1\times X\cong X$
+	- Consider this [diagram](https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkRiACAHW7wFt4nABogAvqXSZc+QinKkATNTpNW7YuMkgM2PASKKlKhizaIQoiVL2yiZACwm15y+JUwoAc3hFQAMwAnCH4kBRAcCCQyVTN2AEIQGkZ6ACMYRgAFaX05ECwwbFgtAODQxHDIpCNY9QteNCwAfVFktIzs2wMLAqK2axAgkKQAZhoqippTOpBeFLAvRhh4ltIASSgWgEokkBT0rJy7HsKsYoGh8rGIqMQa6dcNlt39jqPu-NPz7UvR8duYg8Es82gdOjIPr0zv0fmUwv8-iB0mAoKNwq9Dl08lDilMXOw5vQFktOCthKQeNxGi1eIEiYsYJSAMZYQJMynU1ogOAACyw-hw0TElDEQA) it is evident that $\langle !_X, Id_X\rangle; ((\langle !_X, Id_X\rangle) \pi_X) (x)=\pi_X\langle !_X(x), Id_X(x)\rangle=x$ and that $(\pi_X); \langle !_X, Id_X\rangle(*, x)=\langle !_X, Id_X\rangle x=(!_X(x), x)=(*, x)$
+	 The last part, i.e.  $*=!_X(x)$ comes from the fact that the composite morphism $\pi_x; !_X: 1\times X \mapsto 1$ must be equal to $\pi_1 = Id_{1}: 1\times X \mapsto 1$ by uniqueness of the morphisms from any object to the final object.
 
+##### Part 2
+#todo
 
-
-
-
+#### Part 3
+- $Z^{X+Y}\cong Z^X\times Z^Y$: 
+	- Define $\Psi: Z^{X+Y} \mapsto Z^X \times Z^Y$
+		- By universal property of products define $\Psi(f) = \langle f \circ \iota_x, f \circ \iota_y\rangle$
+	- Define $\Phi: Z^X \times Z^Y\mapsto Z^{X+Y}$
+		- This is the hard part.
+		- We don't define directly $\Phi$ but we define it starting from *how* it behaves, i.e. we define $\Phi': Z^X\times Z^Y \times (X + Y)$
+		- To do it consider the [following diagram](https://tikzcd.yichuanshen.de/#N4Igdg9gJgpgziAXAbVABwnAlgFyxMJZARgBoAGAXVJADcBDAGwFcYkQAdDuAWyceAAtAHoANLnh7wABCICa0iVilxpAClEBqOQEoAviD2l0mXPkIpypYtTpNW7Lr37A1I8R0kz5OxZ+UyogZGJth4BEQATNa2DCxsiCBuYn5eqj6pAapyhsYgGGHmRGSRsfYJIIKGtjBQAObwRKAAZgBOEDxIZCA4EEhWIIz0AEYwjAAKpuEWIFhg2LAgNHEOiWoAklCkfvg49AD6ojq5Le2diNE9fYgDQ6MTU0WJcwtsy+XsG1s7EHv7uicQG0Ol0aL0kABmGh3MaTQoRZ7zLCLd7xRwcNAACywhwAvDBaPtgEEuABjLCtUnqLhoHHEJQqaSbQ7HEJAs5IS7gxBQuxoxI07H-XHSAn-MkU0lqGk4yKZRnMgHQkawx4IwYwZo4QHA84Dbm8lYVZCCnEAD22pv2AE9KEtBiqHvCZi9kWw9JQ9EA) which commutes by coproduct universal property. Basically since our category is a [[Bicartesian Closed Category]] by assumption, it is a [[distributive category]].
+		- Let $\phi'=[\phi_X, \phi_Y]$
+		- By the [[exponential adjunction]] which is valid in any [[Cartesian Closed Category]] $Hom(A \times B, C)\cong Hom(A, B^C)$ if we consider $A=Z^X \times Z^Y$ and $B=(X+Y)$ we have that there must exist $\phi^*$ s.t. $ev_{X+Y}\circ (\phi^* \times Id_{X+Y})=\Phi'$.
+		- Take $\Phi=\phi^*$.
+	 	- Then we need to prove that $\Psi \circ \Phi=Id_{Z^X \times Z^Y}$
