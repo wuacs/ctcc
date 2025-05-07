@@ -1,0 +1,3 @@
+- [[Powerset Functor]]
+
+#list
