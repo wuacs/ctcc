@@ -82,8 +82,7 @@ Let $C$ be a category with finite products ($\times$, 1), prove that the followi
 
 ##### Part 2
 #todo
-
-#### Part 3
+##### Part 3
 - $Z^{X+Y}\cong Z^X\times Z^Y$: 
 	- Define $\Psi: Z^{X+Y} \mapsto Z^X \times Z^Y$
 		- By universal property of products define $\Psi(f) = \langle f \circ \iota_x, f \circ \iota_y\rangle$
@@ -95,3 +94,197 @@ Let $C$ be a category with finite products ($\times$, 1), prove that the followi
 		- By the [[exponential adjunction]] which is valid in any [[Cartesian Closed Category]] $Hom(A \times B, C)\cong Hom(A, B^C)$ if we consider $A=Z^X \times Z^Y$ and $B=(X+Y)$ we have that there must exist $\phi^*$ s.t. $ev_{X+Y}\circ (\phi^* \times Id_{X+Y})=\Phi'$.
 		- Take $\Phi=\phi^*$.
 	 	- Then we need to prove that $\Psi \circ \Phi=Id_{Z^X \times Z^Y}$
+
+#### Exercise 2.1.9
+
+To show that $P_{fin}$ is indeed a functor we need to show:
+
+$P_{fin}(Id_X) = Id_{P_{fin}(X)}$
+
+this comes from the definition of $P_{fin}(Id_X)=\{x | x \in P(Cod(Id_X)) \land \exists q \in P(Dom(Id_X)) . y \in x \iff \exists t \in q . Id_X(t) = y\}$
+which is a fancy way of saying:
+$P_{fin}(Id_X)=\{x | x \in P(X) \land \exists q \in P(X) . y \in x \iff \exists t \in q . t = y\}$
+by picking $q=x$ we get:
+$P_{fin}(Id_X)=\{x | x \in P(X) . y \in x \iff \exists t \in x . t = y\}$
+by picking $t=y$
+$P_{fin}(Id_X)=\{x | x \in P(X) . y \in x \iff y \in x\}$
+which is logically equivalent to
+$P_{fin}(Id_X)=\{x | x \in P(X)\} = P(X) = Id_{P_{fin}(X)}$
+
+Then we need to show preservation of compositionality, i.e. for any composable morphisms in $\textbf{Sets}$ $f: K \mapsto J, g: F \mapsto K$ we need:
+
+$\boxed{P_{fin}(f \circ g) = P_{fin}(f) \circ P_{fin}(g)}$
+
+We re-apply the definition:
+
+$P_{fin}(f \circ g)=\{x | x \in P(Cod(f \circ g)) \land \exists q \in P(Dom(f \circ g)) . y \in x \iff \exists t \in q . (f \circ g)(t) = y\}$
+which is equal to say:
+$P_{fin}(f \circ g)=\{x | x \in P(J) \land \exists q \in P(F) . y \in x \iff \exists t \in q . (f \circ g)(t) = y\}$
+we can rewrite 
+$\exists t \in q. (f \circ g) (t) = y$ as $\exists p \in K, t \in q. p = g(t) \land f(p) = y$ 
+now we note that 
+$\exists q \in P(F).\exists p \in K, t \in q. p = g(t)$ is as saying $\exists c \in P_{fin}(g) \land p \in c$
+thus we obtain
+$P_{fin}(f \circ g)=\{x | x \in P(J) . y \in x \iff \exists c \in P_{fin}(g), p \in c . f(p) = y\}$
+which is as to say
+$P_{fin}(f)(P_{fin}(g))$
+
+#### Exercise 2.1.10
+
+Consider the category $\textbf{Sets}$, initial object $0$, final object $1$, and powerset functor $\mathcal{P}$.
+We wish to prove:
+
+$$
+\boxed{\mathcal{P}(0)\cong1}
+$$
+To do this simply observe that the powerset of the empty-set is just the empty-set itself. And we know that every singleton set is final in $\textbf{Sets}$.
+
+$$
+\boxed{\mathcal{P}(X + Y)\cong \mathcal{P}(X)\times\mathcal{P}(Y)}
+$$
+
+We want to prove that there is an isomorphism between the two objects $i: P(X +Y) \mapsto P(X) \times P(Y)$ is an isomorphism if defined as $i(x)\mapsto (y, z)$ where 
+$y= \{w | \exists q \in x. q = (w, 1)\}$ and $z=\{w|\exists q \in x .q = (w, 2)\}$.
+Then $i': P(X) \times P(Y) \mapsto P(X+Y)$ is given by $i'(x, y) = \{z | (z=(w, 1) \land w \in x \land w \notin y) \lor (z=(w, 2) \land w \in y \land w \notin x)\} \cup \{z | z = (w, 1) \land w \in y \land w \in x\}$
+Then $i' \circ i(p) = i'( \{w | \exists q \in p. q = (w, 1)\}, \{w|\exists q \in p . q= (w, 2)\})$
+
+The application of $i'$ can be decomposed of the union of three disjoint sets:
+
+1. $\{z | (z = (w, 1) \land w \in \{r | \exists b\in p. b = (r, 1)\} \land w \notin \{r | \exists b \in p. b = (r, 2)\} \}$ 
+2. $\{z | (z = (w, 2) \land w \in \{r | \exists b\in p. b = (r, 2)\} \land w \notin \{r | \exists b \in p. b = (r, 1)\} \}$ 
+3. $\{z | (z = (w, 1) \land w \in \{r | \exists b\in p. b = (r, 2)\} \land w \in \{r | \exists b \in p. b = (r, 1)\} \}$ 
+
+each element in $x$ is in one and only one of those three sets.
+#### Exercise 2.1.11
+
+This exercise's point is to show that the functor $2^X$ 
+1.  is a *contravariant* functor $\textbf{Sets}^{op} \mapsto \textbf{Sets}$
+2.  any morphism between $2^X$ to $2^Y$ is in bijection with a function from the parts of $X$ to the parts of $Y$.
+
+##### Part 1
+we need first to define what is
+$2^{(\_)}(f)$ for any function $f: A \mapsto B$ in $\text{Sets}^{op}$
+it is $(F(f))(g) = t$ such that $t(a) = 1$ iff $\exists b. f(b) = a \land g(b) = 1$ otherwise 0.
+(remember that a function $f: A \mapsto B$ in $\textbf{Sets}$ is a function $B \mapsto A$ in $\textbf{Sets}^{op}$)
+
+We need to prove preservation of identity functions, which does not use contravariance:
+
+$\boxed{2^{(\_)}(Id_X)(g) = t \text{ such that } t(x)=1 \iff Id_X(x) = k \land g(k) = 1}$
+We note that in $Id_X(x) = k$ $k=x$, thus the expression becomes:
+$2^{(\_)}(Id_X)(g) = t$ such that $t(x)=1$ iff $g(k) = 1$ i.e. $g=t$.
+
+We need to prove preservation of composition.
+Let $f:B \mapsto A$ and $g: C \mapsto B$ functions in $\textbf{Sets}^{op}$ (they are really functions in $\textbf{Sets}^{op}$)
+
+$F(f \circ g)(t) = q$ if $q(c) = 1$ iff $\exists a. g\circ f(a) = c \land t(a) = 1$ otherwise 0.
+
+$F(f)(t) = q$ if $q(b) = 1$ iff $\exists a. f(a) = b \land t(a) = 1$
+
+$F(g)(t) = q$ if $q(c) = 1$ iff $\exists b. g(b) = c \land t(b) = 1$
+
+Thus their composition is $F(g)(F(f)(t)) = q$ if $q(c) = 1$ iff $\exists b. g(b) = c \land F(f)(t)(b) = 1$, that is, if we substitute b with $\exists a. f(a) = b$ we obtain
+$F(g)(F(f)(t)) = q$ if $q(c) = 1$ iff $\exists a. g(f(a))=b \land t(a) = 1$
+
+
+
+
+#### Exercise 2.1.12
+##### Part 1
+
+###### Proof that direct image functor preserves joins(i.e. unions): 
+
+We need to prove that $\amalg_f P(X \cup Z) \mapsto \amalg_f P(X) \cup \amalg_f P(Z)$.
+
+By definition $\amalg_f P(X \cup Z) =\{y | \exists x . x \subseteq X \cup Y \land \forall k \in y. \exists t \in x. f(t) = k\}$.
+
+But we can decompose the definition piecewise:
+
+$\amalg_f P(X \cup Z) =\{y | \exists x \subseteq X, \exists y \subseteq Y. \forall k \in y. (\exists t \in x. f(t) = k) \lor (\exists q \in y. f(q) = k)) \}$
+
+thus we can divide it in 
+
+$\amalg_f P(X \cup Z) =\{y_x | \exists x \subseteq X. \forall k \in y_x. (\exists t \in x. f(t) = k) \} \cup \{y_x | \exists x \subseteq X. \forall k \in y_x. (\exists t \in x. f(t) = k) \}$ 
+
+since either element satisfies either $(\exists t \in x. f(t) = k) \lor (\exists q \in y. f(q) = k))$ or both in which case the union deletes the extra copy.
+
+###### Proof that inverse image preserves joins, meets and negation
+
+We just do meets(intersection):
+
+For the intersection we need to prove, for $f: X \mapsto Y$:
+
+$$
+\boxed{f^{-1}(-)(A \cap B)\mapsto f^{-1}(-)(A) \cap f^{-1}(-)(B)}
+$$
+
+$f^{-1}(-)(A \cap B) = y$ such that $y \subseteq X . \forall k \in y. f(k)\in A \cap B$
+where $A, B \subseteq Y$.
+
+Then, it is clear that if $f(k) \in A \cap B$ it means it is in both.
+
+Thus
+$f^{-1}(-)(A) = y_A$ such that $y_A \subseteq X. \forall k \in y_A. f(k) \in A$
+$f^{-1}(-)(B) = y_B$ such that $y_B \subseteq X. \forall k \in y_B. f(k) \in B$
+their intersection is 
+$k \in y_A \cap y_B \iff f(k) \in A \land f(k) \in B$ i.e. $f(k) \in A \cap B$
+
+##### Part 2 (Galois Connection)
+
+First, the definition of Galois Connection is given [[Galois Connection|here]](from Wikipedia).
+
+We need to prove 
+$$
+\boxed{\amalg_f(U) \subseteq V \iff U \subseteq f^{-1}(V)}
+$$ 
+For the $\rightarrow)$ 
+
+$\amalg_f(U) = \{f(x) | x \in U \}$ (By def.)
+
+$f^{-1}(V)=\{ x | f(x) \in V \}$ (by def.)
+
+since $f(x) \in V \forall x\in U$ we have $\forall x \in U . x \in f^{-1}(V)$
+
+For the $\leftarrow)$
+
+if $x\in U$ we know $f(x) \in V$ which proves $\amalg_f(U) \subseteq V$ 
+
+##### Part 3 (New Galois Connection)
+
+The product definition
+
+$$
+\amalg'_f(U) = \{y \in Y| \forall x \in X. f(x) = y \implies x \in U\}
+$$
+I.e. the image of a subset of X is just those elements which are "fully represented" i.e. if took out the subset from $X$ we would lose elements from the set $Im(f)$.
+
+we need to prove the Galois Connection
+
+$$
+f^{-1}(V) \subseteq U \iff V \subseteq \amalg'_f(U)
+$$
+$\rightarrow)$
+suppose there is $a \in V$ such that $a \notin \amalg'_f(U)$ then this must be because $\exists x \in X. f(x) = a \land x \notin U$
+but this is impossible:
+1. $a \in V$(assumption) implies
+2. any $x \in X$ s.t. $f(x) = a$ are in $f^{-1}$
+3. But by $f^{-1}\subseteq U$ we have any $x\in X. s.t. f(x) =a \implies x \in U$ Contradiction
+
+$\leftarrow)$
+By assumption if $a \in V$ then $\forall x\in X. f(x) = a \implies x \in U$, thus the set
+$\{x | f(x) \in V \equiv \exists a \in V. f(x) = a\}$ is fully contained in $U$.
+
+#### Exercise 2.1.14
+
+##### Part 2
+
+Define $q(p) = [p]$ i.e. the equivalence class of $p$. Then clearly $q \circ f(x) = q \circ g(x)$ since by def. $f(x)$ belongs in the same eq. class of $g(x)$.
+
+Then we need to prove that for arb. $Z$ and $h: Y \mapsto Z$ s.t. $h\circ f = h\circ g$(i.e. sends the same $g(x)$ to the same $f(x)$) there is an unique $k: Q \mapsto Z$ such that $k \circ q = h$.
+
+Define $k([q])=h(q)$ (we need to prove that the choice of this q is arbitrary among the candidates in $[q]$) i.e. that $[q] = [p] \implies k(q) = k(p)$ but if $[q]= [p]$ then $q$ and $p$ are related by a chain of $g(x), f(x)$ i.e. there must be some sequence $f(q), g(q), f(..), g(..),..., f(p), g(p)$ (in the case of reflexive pairs this sequence has length 0).
+
+Thus by def. of $h$ it must be that $h(q) = h(p)$. 
+
+Then we consider the case of elements in Y which are not the image of any element in $f(x)$ or $g(x)$.
+They are mapped to the singleton class of equivalence of themselves. 
+Thus, the choice of $k([q])$ is forced to be $h(q)$, guaranteeing commutativity.
